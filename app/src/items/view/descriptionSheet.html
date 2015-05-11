@@ -1,0 +1,23 @@
+<!--
+  Straight out of: https://github.com/angular/material-start/blob/master/app/src/users/view/contactSheet.html
+  Clearly this template for a User contactSheet doesn't make sense as an Item descriptionSheet.html.
+  I am just running with this so that I can test/confirm that everthing in app/src/items as copied and renamed 
+  from app/src/users works in the newly copied-and-tweak tree. After commiting that working version, then
+  this template and the Item, ItemService, and ItemController will need to be item-y
+  -->
+<md-bottom-sheet class="md-list md-has-header">
+
+    <md-subheader>
+        Contact <span class="name">{{ vm.user.name }}</span>:
+    </md-subheader>
+
+    <md-list>
+      <md-item ng-repeat="item in vm.items">
+        <md-button ng-click="vm.performAction(item)">
+            <md-icon md-svg-icon="{{ item.icon_url }}"></md-icon>
+            {{item.name}}
+        </md-button>
+      </md-item>
+    </md-list>
+
+</md-bottom-sheet>
