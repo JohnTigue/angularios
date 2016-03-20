@@ -1,0 +1,63 @@
+var aDemoApp = angular.module('mdDataTableDemo', ['ngMaterial', 'md.data.table']);
+
+aDemoApp.config(['$compileProvider', '$mdThemingProvider', function ($compileProvider, $mdThemingProvider) {
+    'use strict';
+    
+    $compileProvider.debugInfoEnabled(false);
+    
+    $mdThemingProvider.theme('default')
+      .primaryPalette('blue')
+      .accentPalette('pink');
+  }]);
+
+
+// straight from the docs: https://github.com/daniel-nagy/md-data-table
+aDemoApp.controller('dataTableController', ['dumdum', '$scope', function (dumdum, $scope) {
+  'use strict';
+
+  $scope.selected = [];
+
+  $scope.query = {
+    order: 'name',
+    limit: 5,
+    page: 1
+  };
+
+  function getDesserts(query) {
+    $scope.promise = dumdum; //pre-jft: $nutrition.desserts.get(query, success).$promise;
+    success(dummyDesserts);
+  }
+
+  function success(desserts) {
+    $scope.desserts = desserts;
+  }
+
+  $scope.onPaginate = function (page, limit) {
+    getDesserts(angular.extend({}, $scope.query, {page: page, limit: limit}));
+  };
+
+  $scope.onReorder = function (order) {
+    getDesserts(angular.extend({}, $scope.query, {order: order}));
+  };
+
+}]);
+
+
+var dummyDesserts = {};
+dummyDesserts.data = [
+      { name: 'a', calories: {value: '11'}, fat: {value:'2'}, carbs: {value:'3'}, protein: {value:'4'}, sodium: {value:'5'}, calcium: {value:'6', units:'b'}, iron: {value:'7', units: 'c'} },
+      { name: 'b', calories: {value: '12'}, fat: {value:'2'}, carbs: {value:'3'}, protein: {value:'4'}, sodium: {value:'5'}, calcium: {value:'6', units:'b'}, iron: {value:'7', units: 'c'} },
+      { name: 'c', calories: {value: '13'}, fat: {value:'2'}, carbs: {value:'3'}, protein: {value:'4'}, sodium: {value:'5'}, calcium: {value:'6', units:'b'}, iron: {value:'7', units: 'c'} },
+      { name: 'c', calories: {value: '14'}, fat: {value:'2'}, carbs: {value:'3'}, protein: {value:'4'}, sodium: {value:'5'}, calcium: {value:'6', units:'b'}, iron: {value:'7', units: 'c'} }
+    ];
+
+
+aDemoApp.factory( 'dumdum', ['$q', function ($q){
+    
+  return $q.resolve(dummyDesserts);
+  }]);
+
+    
+
+console.log('finished parsing main.js');
+
