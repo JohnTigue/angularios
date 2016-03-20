@@ -40,6 +40,11 @@ aDemoApp.controller('dataTableController', ['dumdum', '$scope', function (dumdum
     getDesserts(angular.extend({}, $scope.query, {order: order}));
   };
 
+  $scope.$watch('query.order', function dummy( newVal, oldVal ) {
+    // query.order is dummy shit. Doing this just to get the init data load working
+    getDesserts($scope.query);  
+    });
+    
 }]);
 
 
@@ -53,11 +58,9 @@ dummyDesserts.data = [
 
 
 aDemoApp.factory( 'dumdum', ['$q', function ($q){
-    
   return $q.resolve(dummyDesserts);
   }]);
 
-    
 
 console.log('finished parsing main.js');
 
