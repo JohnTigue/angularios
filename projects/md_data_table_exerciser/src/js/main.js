@@ -40,10 +40,15 @@ aDemoApp.controller('dataTableController', ['dumdum', '$scope', function (dumdum
     getDesserts(angular.extend({}, $scope.query, {order: order}));
   };
 
-  $scope.$watch('query.order', function dummy( newVal, oldVal ) {
-    // query.order is dummy shit. Doing this just to get the init data load working
+    getDesserts($scope.query);  
+
+    /*
+    This was durnig dev: don't want an unnecessary watch so just called getDesserts() during the controllers init, i.e. added the previous line of code above here. 
+    $scope.$watch('query.order', function dummy( newVal, oldVal ) {
+    // query.order is dummy value. Doing this just to get the init data load working
     getDesserts($scope.query);  
     });
+    */
     
 }]);
 
